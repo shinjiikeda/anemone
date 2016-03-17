@@ -109,7 +109,7 @@ module Anemone
           urls << page.url
         end
         core.urls = urls
-        core.run
+        core.run(true)
       end
     end
     #
@@ -164,10 +164,11 @@ module Anemone
     #
     # Perform the crawl
     #
-    def run
+    def run(is_recrawl = false)
       process_options
-
-      @urls.delete_if { |url| !visit_link?(url) }
+      if !is_recrawl
+        @urls.delete_if { |url| !visit_link?(url) }
+      end
       return if @urls.empty?
 
       link_queue = Queue.new
@@ -281,15 +282,17 @@ module Anemone
     end
     
     def visit_link_page?(link)
-       if (!@pages.has_page?(link) ||
-           (!@pages[link].nil? &&
-            !@pages[link].last_visit_time.nil? &&
-            @pages[link].last_visit_time < (Time.now.to_i - @opts[:recrawl_interval])))
+       page = @pages[link]
+       return true if page.nil?
+
+       if (!page.last_visit_time.nil? &&
+            page.last_visit_time < (Time.now.to_i - @opts[:recrawl_interval]))
          return true
        else
          return false
        end
     end
+
     #
     # Returns +true+ if we are obeying robots.txt and the link
     # is granted access in it. Always returns +true+ when we are
