@@ -5,7 +5,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "https://github.com/shinjiikeda/anemone-kai"
   s.platform = Gem::Platform::RUBY
   s.summary = "Anemone Kai web-spider framework"
-  s.executables = %w[anemone]
+  s.executables = %w[anemone-kai]
   s.require_path = "lib"
   s.has_rdoc = true
   s.rdoc_options << '-m' << 'README.rdoc' << '-t' << 'Anemone'
