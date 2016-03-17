@@ -6,7 +6,7 @@ module AnemoneKai
       command = ARGV.shift
       
       if COMMANDS.include? command
-        load "anemone/cli/#{command.tr('-', '_')}.rb"
+        load "anemone-kai/cli/#{command.tr('-', '_')}.rb"
       else
         puts <<-INFO
 Anemone is a web spider framework that can collect

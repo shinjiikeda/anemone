@@ -1,4 +1,4 @@
-require 'anemone'
+require 'anemone-kai'
 require 'optparse'
 require 'ostruct'
 

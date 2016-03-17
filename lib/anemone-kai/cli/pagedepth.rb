@@ -1,4 +1,4 @@
-require 'anemone'
+require 'anemone-kai'
 
 begin
   # make sure that the first option is a URL we can crawl
