@@ -9,34 +9,34 @@ module AnemoneKai
     end
 
     def self.PStore(*args)
-      require 'anemone/storage/pstore'
+      require 'anemone-kai/storage/pstore'
       self::PStore.new(*args)
     end
 
     def self.TokyoCabinet(file = 'anemone.tch')
-      require 'anemone/storage/tokyo_cabinet'
+      require 'anemone-kai/storage/tokyo_cabinet'
       self::TokyoCabinet.new(file)
     end
 
     def self.KyotoCabinet(file = 'anemone.kch')
-      require 'anemone/storage/kyoto_cabinet'
+      require 'anemone-kai/storage/kyoto_cabinet'
       self::KyotoCabinet.new(file)
     end
 
     def self.MongoDB(mongo_db = nil, collection_name = 'pages')
-      require 'anemone/storage/mongodb'
+      require 'anemone-kai/storage/mongodb'
       mongo_db ||= Mongo::Connection.new.db('anemone')
       raise "First argument must be an instance of Mongo::DB" unless mongo_db.is_a?(Mongo::DB)
       self::MongoDB.new(mongo_db, collection_name)
     end
 
     def self.Redis(opts = {})
-      require 'anemone/storage/redis'
+      require 'anemone-kai/storage/redis'
       self::Redis.new(opts)
     end
     
     def self.SQLite3(file = 'anemone.db')
-      require 'anemone/storage/sqlite3'
+      require 'anemone-kai/storage/sqlite3'
       self::SQLite3.new(file)
     end
 
