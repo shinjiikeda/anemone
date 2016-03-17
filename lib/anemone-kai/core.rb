@@ -186,7 +186,7 @@ module AnemoneKai
       loop do
         page = page_queue.deq
         @pages.touch_key page.url
-        puts "#{page.url} Queue: #{link_queue.size}" if @opts[:verbose]
+        STDERR.puts "#{page.url} Queue: #{link_queue.size}" if @opts[:verbose]
         do_page_blocks page
         page.discard_doc! if @opts[:discard_page_bodies]
 
