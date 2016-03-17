@@ -254,7 +254,7 @@ module Anemone
     # Returns +false+ otherwise.
     #
     def visit_link?(link, from_page = nil)
-      !(@pages.has_page?(link) || @pages[link].last_visit_time < (Time.now.to_s - @opt[:recrawl_interval])) &&
+      (!@pages.has_page?(link) || @pages[link].last_visit_time.nil? || @pages[link].last_visit_time < (Time.now.to_i - @opts[:recrawl_interval])) &&
       !skip_link?(link) &&
       !skip_query_string?(link) &&
       allowed(link) &&
