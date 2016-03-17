@@ -55,7 +55,9 @@ module Anemone
       # proxy server port number
       :proxy_port => false,
       # HTTP read timeout in seconds
-      :read_timeout => nil
+      :read_timeout => nil,
+      
+      :recrawl_interval => 0,
     }
 
     # Create setter methods for all options to be called from the crawl block
@@ -252,7 +254,7 @@ module Anemone
     # Returns +false+ otherwise.
     #
     def visit_link?(link, from_page = nil)
-      !@pages.has_page?(link) &&
+      !(@pages.has_page?(link) || @pages[link].last_visit_time < (Time.now.to_s - @opt[:recrawl_interval])) &&
       !skip_link?(link) &&
       !skip_query_string?(link) &&
       allowed(link) &&
