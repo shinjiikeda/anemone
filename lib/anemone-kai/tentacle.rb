@@ -1,4 +1,4 @@
-require 'anemone/http'
+require 'anemone-kai/http'
 
 module AnemoneKai
   class Tentacle
