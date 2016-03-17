@@ -8,7 +8,7 @@ end
 
 require 'forwardable'
 
-module Anemone
+module AnemoneKai
   module Storage
     class KyotoCabinet
       extend Forwardable

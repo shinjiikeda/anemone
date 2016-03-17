@@ -5,7 +5,7 @@ rescue LoadError
   exit
 end
 
-module Anemone
+module AnemoneKai
   module Storage
     class SQLite3 
 

@@ -1,6 +1,6 @@
 require 'anemone/http'
 
-module Anemone
+module AnemoneKai
   class Tentacle
 
     #

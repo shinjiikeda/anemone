@@ -28,7 +28,7 @@ opts = OptionParser.new
 opts.on('-o', '--output filename') {|o| options.output_file = o }
 opts.parse!(ARGV)
 
-Anemone.crawl(root) do |anemone|
+AnemoneKai.crawl(root) do |anemone|
   anemone.after_crawl do |pages|
     open(options.output_file, 'w') {|f| Marshal.dump(pages, f)}
   end

@@ -15,7 +15,7 @@ INFO
   exit(0)
 end
 
-Anemone.crawl(url) do |anemone|
+AnemoneKai.crawl(url) do |anemone|
   anemone.after_crawl do |pages|
     puts pages.uniq!.size
   end

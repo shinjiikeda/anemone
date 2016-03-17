@@ -2,7 +2,7 @@ require 'net/https'
 require 'anemone/page'
 require 'anemone/cookie_store'
 
-module Anemone
+module AnemoneKai
   class HTTP
     # Maximum number of redirects to follow on each get_response
     REDIRECT_LIMIT = 5

@@ -1,7 +1,7 @@
 require 'pstore'
 require 'forwardable'
 
-module Anemone
+module AnemoneKai
   module Storage
     class PStore
       extend Forwardable

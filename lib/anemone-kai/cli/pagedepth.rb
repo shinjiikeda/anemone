@@ -15,7 +15,7 @@ INFO
   exit(0)
 end
 
-Anemone.crawl(root) do |anemone|
+AnemoneKai.crawl(root) do |anemone|
   anemone.skip_links_like %r{^/c/$}, %r{^/stores/$}
 
   anemone.after_crawl do |pages|

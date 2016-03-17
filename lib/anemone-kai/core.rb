@@ -7,7 +7,7 @@ require 'anemone/page_store'
 require 'anemone/storage'
 require 'anemone/storage/base'
 
-module Anemone
+module AnemoneKai
 
   VERSION = '0.7.2';
   ALLOW_HOSTS = []
@@ -15,7 +15,7 @@ module Anemone
   #
   # Convenience method to start a crawl
   #
-  def Anemone.crawl(urls, options = {}, &block)
+  def AnemoneKai.crawl(urls, options = {}, &block)
     Core.crawl(urls, options, &block)
   end
 

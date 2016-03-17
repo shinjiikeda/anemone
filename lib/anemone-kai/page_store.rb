@@ -1,6 +1,6 @@
 require 'forwardable'
 
-module Anemone
+module AnemoneKai
   class PageStore
     extend Forwardable
 

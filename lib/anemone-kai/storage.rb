@@ -1,4 +1,4 @@
-module Anemone
+module AnemoneKai
   module Storage
 
     def self.Hash(*args)

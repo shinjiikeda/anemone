@@ -1,4 +1,4 @@
-module Anemone
+module AnemoneKai
   module CLI
     COMMANDS = %w[count cron pagedepth serialize url-list]
     

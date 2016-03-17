@@ -1,6 +1,6 @@
 require 'anemone/storage/exceptions'
 
-module Anemone
+module AnemoneKai
   module Storage
     class Base
 

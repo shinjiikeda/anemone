@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'ostruct'
 require 'webrick/cookie'
 
-module Anemone
+module AnemoneKai
   class Page
 
     # The URL of the page

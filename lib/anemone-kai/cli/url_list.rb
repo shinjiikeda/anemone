@@ -28,7 +28,7 @@ opts = OptionParser.new
 opts.on('-r', '--relative') { options.relative = true }
 opts.parse!(ARGV)
 
-Anemone.crawl(root, :discard_page_bodies => true) do |anemone|
+AnemoneKai.crawl(root, :discard_page_bodies => true) do |anemone|
   
   anemone.on_every_page do |page|
     if options.relative

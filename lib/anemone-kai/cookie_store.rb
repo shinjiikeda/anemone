@@ -7,7 +7,7 @@ class WEBrick::Cookie
   end
 end
 
-module Anemone
+module AnemoneKai
   class CookieStore < DelegateClass(Hash)
 
     def initialize(cookies = nil)

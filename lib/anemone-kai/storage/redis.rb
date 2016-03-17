@@ -1,6 +1,6 @@
 require 'redis'
 
-module Anemone
+module AnemoneKai
   module Storage
     class Redis
 

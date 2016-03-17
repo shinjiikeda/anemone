@@ -33,7 +33,7 @@ opts.on('-r', '--relative')        { options.relative = true }
 opts.on('-o', '--output filename') {|o| options.output_file = o }
 opts.parse!(ARGV)
 
-Anemone.crawl(root, {:discard_page_bodies => true}) do |anemone|  
+AnemoneKai.crawl(root, {:discard_page_bodies => true}) do |anemone|  
   
   anemone.after_crawl do |pages|
     puts "Crawl results for #{root}\n"
