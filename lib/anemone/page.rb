@@ -30,6 +30,9 @@ module Anemone
     # Response time of the request for this page in milliseconds
     attr_accessor :response_time
 
+    # Last visit time
+    attr_accessor :last_visit_time
+    
     #
     # Create a new page
     #
@@ -45,6 +48,7 @@ module Anemone
       @depth = params[:depth] || 0
       @redirect_to = to_absolute(params[:redirect_to])
       @response_time = params[:response_time]
+      @last_visit_time = params[:last_visit_time]
       @body = params[:body]
       @error = params[:error]
 
@@ -173,11 +177,11 @@ module Anemone
     end
 
     def marshal_dump
-      [@url, @headers, @data, @body, @links, @code, @visited, @depth, @referer, @redirect_to, @response_time, @fetched]
+      [@url, @headers, @data, @body, @links, @code, @visited, @depth, @referer, @redirect_to, @response_time, @last_visit_time, @fetched]
     end
 
     def marshal_load(ary)
-      @url, @headers, @data, @body, @links, @code, @visited, @depth, @referer, @redirect_to, @response_time, @fetched = ary
+      @url, @headers, @data, @body, @links, @code, @visited, @depth, @referer, @redirect_to, @response_time, @last_visit_time, @fetched = ary
     end
 
     def to_hash
@@ -192,6 +196,7 @@ module Anemone
        'referer' => @referer.to_s,
        'redirect_to' => @redirect_to.to_s,
        'response_time' => @response_time,
+       'last_visit_time' => @last_visit_time,
        'fetched' => @fetched}
     end
 
@@ -207,6 +212,7 @@ module Anemone
        '@referer' => hash['referer'],
        '@redirect_to' => (!!hash['redirect_to'] && !hash['redirect_to'].empty?) ? URI(hash['redirect_to']) : nil,
        '@response_time' => hash['response_time'].to_i,
+       '@last_visit_time' => hash['last_visit_time'].to_i,
        '@fetched' => hash['fetched']
       }.each do |var, value|
         page.instance_variable_set(var, value)

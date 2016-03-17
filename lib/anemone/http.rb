@@ -39,7 +39,8 @@ module Anemone
                                       :referer => referer,
                                       :depth => depth,
                                       :redirect_to => redirect_to,
-                                      :response_time => response_time)
+                                      :response_time => response_time,
+                                      :last_visit_time => Time.now.to_i)
         end
 
         return pages
