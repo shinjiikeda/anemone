@@ -103,16 +103,21 @@ module AnemoneKai
         ## recrawl
         self.new([], opts) do |core|
           yield core if block_given?
-          core.process_options
-          urls = []
-          core.pages.each_value do | page |
-            urls << page.url
-          end
-          core.urls = urls
-          core.run(true)
+          core.recrawl
         end
       end
     end
+
+    def recrawl()
+      process_options
+      @urls = []
+       @pages.each_value do | page |
+        @urls << page.url
+      end
+      @urls = urls
+      run(true)
+    end
+    
     #
     # Add a block to be executed on the PageStore after the crawl
     # is finished
