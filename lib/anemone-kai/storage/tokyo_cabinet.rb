@@ -2,7 +2,7 @@ begin
   require 'tokyocabinet'
 rescue LoadError
   puts $!
-  puts "You need the tokyocabinet gem to use Anemone::Storage::TokyoCabinet"
+  puts "You need the tokyocabinet gem to use AnemoneKai::Storage::TokyoCabinet"
   exit
 end
 

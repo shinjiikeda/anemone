@@ -9,7 +9,7 @@ module AnemoneKai
     def initialize(link_queue, page_queue, opts = {})
       @link_queue = link_queue
       @page_queue = page_queue
-      @http = Anemone::HTTP.new(opts)
+      @http = AnemoneKai::HTTP.new(opts)
       @opts = opts
     end
 

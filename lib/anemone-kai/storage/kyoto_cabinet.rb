@@ -2,7 +2,7 @@ begin
   require 'kyotocabinet'
 rescue LoadError
   puts $!
-  puts "You need the kyotocabinet-ruby gem to use Anemone::Storage::KyotoCabinet"
+  puts "You need the kyotocabinet-ruby gem to use AnemoneKai::Storage::KyotoCabinet"
   exit
 end
 

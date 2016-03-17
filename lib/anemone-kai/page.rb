@@ -174,7 +174,7 @@ module AnemoneKai
     #
     def in_domain?(uri)
       return true if uri.host == @url.host
-      Anemone::ALLOW_HOSTS.each do | host |
+      AnemoneKai::ALLOW_HOSTS.each do | host |
         return true if uri.host == host
       end
       return false

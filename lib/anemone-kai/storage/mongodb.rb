@@ -1,7 +1,7 @@
 begin
   require 'mongo'
 rescue LoadError
-  puts "You need the mongo gem to use Anemone::Storage::MongoDB"
+  puts "You need the mongo gem to use AnemoneKai::Storage::MongoDB"
   exit
 end
 

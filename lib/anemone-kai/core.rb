@@ -36,7 +36,7 @@ module AnemoneKai
       # don't throw away the page response body after scanning it for links
       :discard_page_bodies => false,
       # identify self as Anemone/VERSION
-      :user_agent => "Anemone/#{Anemone::VERSION}",
+      :user_agent => "Anemone/#{AnemoneKai::VERSION}",
       # no delay between requests
       :delay => 0,
       # don't obey the robots exclusion protocol
@@ -84,7 +84,7 @@ module AnemoneKai
       @skip_link_patterns = []
       @after_crawl_blocks = []
 
-      Anemone::ALLOW_HOSTS.concat opts[:allow_hosts] if opts.has_key?(:allow_hosts)
+      AnemoneKai::ALLOW_HOSTS.concat opts[:allow_hosts] if opts.has_key?(:allow_hosts)
       @opts = opts
 
       yield self if block_given?
@@ -220,7 +220,7 @@ module AnemoneKai
       return if @processed_options
       @opts = DEFAULT_OPTS.merge @opts
       @opts[:threads] = 1 if @opts[:delay] > 0
-      storage = Anemone::Storage::Base.new(@opts[:storage] || Anemone::Storage.Hash)
+      storage = AnemoneKai::Storage::Base.new(@opts[:storage] || AnemoneKai::Storage.Hash)
       @pages = PageStore.new(storage)
       @robots = Robotex.new(@opts[:user_agent]) if @opts[:obey_robots_txt]
 
