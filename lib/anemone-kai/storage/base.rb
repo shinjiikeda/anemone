@@ -1,4 +1,4 @@
-require 'anemone/storage/exceptions'
+require 'anemone-kai/storage/exceptions'
 
 module AnemoneKai
   module Storage

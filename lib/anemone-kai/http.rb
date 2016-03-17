@@ -1,6 +1,6 @@
 require 'net/https'
-require 'anemone/page'
-require 'anemone/cookie_store'
+require 'anemone-kai/page'
+require 'anemone-kai/cookie_store'
 
 module AnemoneKai
   class HTTP

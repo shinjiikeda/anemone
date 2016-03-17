@@ -1,11 +1,11 @@
 require 'thread'
 require 'robotex'
-require 'anemone/tentacle'
-require 'anemone/page'
-require 'anemone/exceptions'
-require 'anemone/page_store'
-require 'anemone/storage'
-require 'anemone/storage/base'
+require 'anemone-kai/tentacle'
+require 'anemone-kai/page'
+require 'anemone-kai/exceptions'
+require 'anemone-kai/page_store'
+require 'anemone-kai/storage'
+require 'anemone-kai/storage/base'
 
 module AnemoneKai
 
