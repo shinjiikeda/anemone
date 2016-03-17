@@ -3,27 +3,27 @@ require 'spec_helper'
 
 %w[pstore tokyo_cabinet kyoto_cabinet sqlite3 mongodb redis].each { |file| require "anemone/storage/#{file}.rb" }
 
-module Anemone
+module AnemoneKai
   describe Storage do
 
     describe ".Hash" do
       it "returns a Hash adapter" do
-        Anemone::Storage.Hash.should be_an_instance_of(Hash)
+        AnemoneKai::Storage.Hash.should be_an_instance_of(Hash)
       end
     end
 
     describe ".PStore" do
       it "returns a PStore adapter" do
         test_file = 'test.pstore'
-        Anemone::Storage.PStore(test_file).should be_an_instance_of(Anemone::Storage::PStore)
+        AnemoneKai::Storage.PStore(test_file).should be_an_instance_of(AnemoneKai::Storage::PStore)
       end
     end
 
     describe ".TokyoCabinet" do
       it "returns a TokyoCabinet adapter" do
         test_file = 'test.tch'
-        store = Anemone::Storage.TokyoCabinet(test_file)
-        store.should be_an_instance_of(Anemone::Storage::TokyoCabinet)
+        store = AnemoneKai::Storage.TokyoCabinet(test_file)
+        store.should be_an_instance_of(AnemoneKai::Storage::TokyoCabinet)
         store.close
       end
     end
@@ -32,16 +32,16 @@ module Anemone
       context "when the file is specified" do
         it "returns a KyotoCabinet adapter using that file" do
           test_file = 'test.kch'
-          store = Anemone::Storage.KyotoCabinet(test_file)
-          store.should be_an_instance_of(Anemone::Storage::KyotoCabinet)
+          store = AnemoneKai::Storage.KyotoCabinet(test_file)
+          store.should be_an_instance_of(AnemoneKai::Storage::KyotoCabinet)
           store.close
         end
       end
 
       context "when no file is specified" do
         it "returns a KyotoCabinet adapter using the default filename" do
-          store = Anemone::Storage.KyotoCabinet
-          store.should be_an_instance_of(Anemone::Storage::KyotoCabinet)
+          store = AnemoneKai::Storage.KyotoCabinet
+          store.should be_an_instance_of(AnemoneKai::Storage::KyotoCabinet)
           store.close
         end
       end
@@ -50,24 +50,24 @@ module Anemone
     describe ".SQLite3" do
       it "returns a SQLite3 adapter" do
         test_file = 'test.db'
-        store = Anemone::Storage.SQLite3(test_file)
-        store.should be_an_instance_of(Anemone::Storage::SQLite3)
+        store = AnemoneKai::Storage.SQLite3(test_file)
+        store.should be_an_instance_of(AnemoneKai::Storage::SQLite3)
         store.close
       end
     end
 
     describe ".MongoDB" do
       it "returns a MongoDB adapter" do
-        store = Anemone::Storage.MongoDB
-        store.should be_an_instance_of(Anemone::Storage::MongoDB)
+        store = AnemoneKai::Storage.MongoDB
+        store.should be_an_instance_of(AnemoneKai::Storage::MongoDB)
         store.close
       end
     end
 
     describe ".MongoDB" do
       it "returns a Redis adapter" do
-        store = Anemone::Storage.Redis
-        store.should be_an_instance_of(Anemone::Storage::Redis)
+        store = AnemoneKai::Storage.Redis
+        store.should be_an_instance_of(AnemoneKai::Storage::Redis)
         store.close
       end
     end
@@ -152,7 +152,7 @@ module Anemone
         before(:each) do
           @test_file = 'test.pstore'
           File.delete @test_file rescue nil
-          @store =  Anemone::Storage.PStore(@test_file)
+          @store =  AnemoneKai::Storage.PStore(@test_file)
         end
 
         after(:all) do
@@ -166,7 +166,7 @@ module Anemone
         before(:each) do
           @test_file = 'test.tch'
           File.delete @test_file rescue nil
-          @store =  Anemone::Storage.TokyoCabinet(@test_file)
+          @store =  AnemoneKai::Storage.TokyoCabinet(@test_file)
         end
 
         after(:each) do
@@ -178,7 +178,7 @@ module Anemone
         end
 
         it "should raise an error if supplied with a file extension other than .tch" do
-          lambda { Anemone::Storage.TokyoCabinet('test.tmp') }.should raise_error(RuntimeError)
+          lambda { AnemoneKai::Storage.TokyoCabinet('test.tmp') }.should raise_error(RuntimeError)
         end
       end
 
@@ -188,7 +188,7 @@ module Anemone
         before(:each) do
           @test_file = 'test.kch'
           File.delete @test_file rescue nil
-          @store =  Anemone::Storage.KyotoCabinet(@test_file)
+          @store =  AnemoneKai::Storage.KyotoCabinet(@test_file)
         end
 
         after(:each) do
@@ -200,7 +200,7 @@ module Anemone
         end
 
         it "should raise an error if supplied with a file extension other than .kch" do
-          lambda { Anemone::Storage.KyotoCabinet('test.tmp') }.should raise_error(RuntimeError)
+          lambda { AnemoneKai::Storage.KyotoCabinet('test.tmp') }.should raise_error(RuntimeError)
         end
       end
 
@@ -210,7 +210,7 @@ module Anemone
         before(:each) do
           @test_file = 'test.db'
           File.delete @test_file rescue nil
-          @store =  Anemone::Storage.SQLite3(@test_file)
+          @store =  AnemoneKai::Storage.SQLite3(@test_file)
         end
 
         after(:each) do

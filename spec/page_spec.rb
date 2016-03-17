@@ -1,12 +1,12 @@
 $:.unshift(File.dirname(__FILE__))
 require 'spec_helper'
 
-module Anemone
+module AnemoneKai
   describe Page do
 
     before(:each) do
       FakeWeb.clean_registry
-      @http = Anemone::HTTP.new
+      @http = AnemoneKai::HTTP.new
       @page = @http.fetch_page(FakePage.new('home', :links => '1').url)
     end
 

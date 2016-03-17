@@ -1,16 +1,16 @@
 $:.unshift(File.dirname(__FILE__))
 require 'spec_helper'
 
-describe Anemone do
+describe AnemoneKai do
 
   it "should have a version" do
-    Anemone.const_defined?('VERSION').should == true
+    AnemoneKai.const_defined?('VERSION').should == true
   end
 
-  it "should return a Anemone::Core from the crawl, which has a PageStore" do
-    result = Anemone.crawl(SPEC_DOMAIN)
-    result.should be_an_instance_of(Anemone::Core)
-    result.pages.should be_an_instance_of(Anemone::PageStore)
+  it "should return a AnemoneKai::Core from the crawl, which has a PageStore" do
+    result = AnemoneKai.crawl(SPEC_DOMAIN)
+    result.should be_an_instance_of(AnemoneKai::Core)
+    result.pages.should be_an_instance_of(AnemoneKai::PageStore)
   end
 
 end

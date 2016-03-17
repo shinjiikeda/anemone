@@ -1,6 +1,6 @@
 FakeWeb.allow_net_connect = false
 
-module Anemone
+module AnemoneKai
   SPEC_DOMAIN = "http://www.example.com/"
   AUTH_SPEC_DOMAIN = "http://user:pass@#{URI.parse(SPEC_DOMAIN).host}/"
 
@@ -74,4 +74,4 @@ module Anemone
 end
 
 #default root
-Anemone::FakePage.new
+AnemoneKai::FakePage.new
