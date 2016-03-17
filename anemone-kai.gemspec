@@ -1,7 +1,7 @@
 spec = Gem::Specification.new do |s|
   s.name = "anemone-kai"
   s.version = "0.7.2"
-  s.author = "Chris Kite"
+  s.author = ["Chris Kite", "Shinji Ikeda"]
   s.homepage = "https://github.com/shinjiikeda/anemone-kai"
   s.platform = Gem::Platform::RUBY
   s.summary = "Anemone Kai web-spider framework"
