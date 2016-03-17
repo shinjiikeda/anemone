@@ -10,6 +10,7 @@ require 'anemone/storage/base'
 module Anemone
 
   VERSION = '0.7.2';
+  ALLOW_HOSTS = []
 
   #
   # Convenience method to start a crawl
@@ -82,6 +83,8 @@ module Anemone
       @on_pages_like_blocks = Hash.new { |hash,key| hash[key] = [] }
       @skip_link_patterns = []
       @after_crawl_blocks = []
+
+      Anemone::ALLOW_HOSTS.concat opts[:allow_hosts] if opts.has_key?(:allow_hosts)
       @opts = opts
 
       yield self if block_given?
@@ -97,19 +100,17 @@ module Anemone
           core.run
         end
       else
-        self.recrawl(opts)
-      end
-    end
-
-    def self.recrawl(opts ={})
-      self.new([], opts) do |core|
-        core.process_options
-        urls = []
-        core.pages.each_value do | page |
-          urls << page.url
+        ## recrawl
+        self.new([], opts) do |core|
+          yield core if block_given?
+          core.process_options
+          urls = []
+          core.pages.each_value do | page |
+            urls << page.url
+          end
+          core.urls = urls
+          core.run(true)
         end
-        core.urls = urls
-        core.run(true)
       end
     end
     #
@@ -168,6 +169,8 @@ module Anemone
       process_options
       if !is_recrawl
         @urls.delete_if { |url| !visit_link?(url) }
+      else
+        @urls.delete_if { |url| !recrawl_link?(url) }
       end
       return if @urls.empty?
 
@@ -291,6 +294,12 @@ module Anemone
        else
          return false
        end
+    end
+    
+    def recrawl_link?(link)
+      page = @pages[link]
+      return true if page.nil? || page.last_visit_time.nil? || page.last_visit_time < (Time.now.to_i - @opts[:recrawl_interval])
+      return false
     end
 
     #

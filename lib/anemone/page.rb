@@ -173,7 +173,11 @@ module Anemone
     # +false+ otherwise
     #
     def in_domain?(uri)
-      uri.host == @url.host
+      return true if uri.host == @url.host
+      Anemone::ALLOW_HOSTS.each do | host |
+        return true if uri.host == host
+      end
+      return false
     end
 
     def marshal_dump
