@@ -24,6 +24,8 @@ module Anemone
     attr_reader :pages
     # Hash of options for the crawl
     attr_reader :opts
+    
+    attr_accessor :urls
 
     DEFAULT_OPTS = {
       # run 4 Tentacle threads to fetch pages
@@ -57,7 +59,7 @@ module Anemone
       # HTTP read timeout in seconds
       :read_timeout => nil,
       
-      :recrawl_interval => 0,
+      :recrawl_interval => 24 * 3600,
     }
 
     # Create setter methods for all options to be called from the crawl block
@@ -89,12 +91,27 @@ module Anemone
     # Convenience method to start a new crawl
     #
     def self.crawl(urls, opts = {})
-      self.new(urls, opts) do |core|
-        yield core if block_given?
-        core.run
+      if !urls.nil? && urls.size > 0
+        self.new(urls, opts) do |core|
+          yield core if block_given?
+          core.run
+        end
+      else
+        self.recrawl(opts)
       end
     end
 
+    def self.recrawl(opts ={})
+      self.new([], opts) do |core|
+        core.process_options
+        urls = []
+        core.pages.each_value do | page |
+          urls << page.url
+        end
+        core.urls = urls
+        core.run
+      end
+    end
     #
     # Add a block to be executed on the PageStore after the crawl
     # is finished
@@ -194,9 +211,9 @@ module Anemone
       self
     end
 
-    private
 
     def process_options
+      return if @processed_options
       @opts = DEFAULT_OPTS.merge @opts
       @opts[:threads] = 1 if @opts[:delay] > 0
       storage = Anemone::Storage::Base.new(@opts[:storage] || Anemone::Storage.Hash)
@@ -204,8 +221,10 @@ module Anemone
       @robots = Robotex.new(@opts[:user_agent]) if @opts[:obey_robots_txt]
 
       freeze_options
+      @processed_options = true
     end
 
+    private
     #
     # Freeze the opts Hash so that no options can be modified
     # once the crawl begins
@@ -254,13 +273,23 @@ module Anemone
     # Returns +false+ otherwise.
     #
     def visit_link?(link, from_page = nil)
-      (!@pages.has_page?(link) || @pages[link].last_visit_time.nil? || @pages[link].last_visit_time < (Time.now.to_i - @opts[:recrawl_interval])) &&
+      visit_link_page?(link) &&
       !skip_link?(link) &&
       !skip_query_string?(link) &&
       allowed(link) &&
       !too_deep?(from_page)
     end
-
+    
+    def visit_link_page?(link)
+       if (!@pages.has_page?(link) ||
+           (!@pages[link].nil? &&
+            !@pages[link].last_visit_time.nil? &&
+            @pages[link].last_visit_time < (Time.now.to_i - @opts[:recrawl_interval])))
+         return true
+       else
+         return false
+       end
+    end
     #
     # Returns +true+ if we are obeying robots.txt and the link
     # is granted access in it. Always returns +true+ when we are
