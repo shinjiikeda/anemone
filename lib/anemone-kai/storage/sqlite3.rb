@@ -1,7 +1,7 @@
 begin
   require 'sqlite3'
 rescue LoadError
-  puts "You need the sqlite3 gem to use AnemoneKai::Storage::SQLite3"
+  STDERR.puts "You need the sqlite3 gem to use AnemoneKai::Storage::SQLite3"
   exit
 end
 

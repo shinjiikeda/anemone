@@ -46,8 +46,8 @@ module AnemoneKai
         return pages
       rescue Exception => e
         if verbose?
-          puts e.inspect
-          puts e.backtrace
+          STDERR.puts e.inspect
+          STDERR.puts e.backtrace
         end
         return [Page.new(url, :error => e)]
       end
@@ -143,7 +143,7 @@ module AnemoneKai
         @cookie_store.merge!(response['Set-Cookie']) if accept_cookies?
         return response, response_time
       rescue Timeout::Error, Net::HTTPBadResponse, EOFError => e
-        puts e.inspect if verbose?
+        STDERR.puts e.inspect if verbose?
         refresh_connection(url)
         retries += 1
         retry unless retries > 3

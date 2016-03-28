@@ -18,7 +18,7 @@ module AnemoneKai
       def [](key)
         @adap[key]
         rescue
-          puts key
+          STDERR.puts key
           raise RetrievalError, $! 
       end
 
